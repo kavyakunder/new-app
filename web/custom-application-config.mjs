@@ -46,7 +46,6 @@ const config = {
     csp: {
      'connect-src': ["'self'", 'https://*.commercetools.com'],
         'frame-src': ["'self'"],
-        'frame-ancestors': ["'self'"],
         'script-src': ["'self'", "'unsafe-inline'"],
    
     },
