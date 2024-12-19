@@ -40,21 +40,21 @@ const config = {
   //   },
   // },
    headers: {
+     permissionsPolicies: {
+      microphone: 'self',
+    },
     csp: {
-      directives: {
-        'connect-src': ["'self'", 'https://*.commercetools.com'],
+     'connect-src': ["'self'", 'https://*.commercetools.com'],
         'media-src': ["'self'"],
         'default-src': ["'self'"],
         'script-src': ["'self'", "'unsafe-inline'"],
         'style-src': ["'self'", "'unsafe-inline'"],
         'img-src': ["'self'", 'data:', 'https:'],
         'frame-src': ["'self'"],
-        'frame-ancestors': ["'self'"]
-      }
+        'frame-ancestors': ["'self'"]   
     },
-      permissionsPolicies: {
-       microphone: 'self',
-     },
+
+    
   }
 };
 
