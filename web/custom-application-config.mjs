@@ -34,11 +34,19 @@ const config = {
       permissions: [PERMISSIONS.View],
     },
   ],
+  // headers: {
+  //   permissionsPolicies: {
+  //     microphone: 'self',
+  //   },
+  // },
   headers: {
-    permissionsPolicies: {
-      microphone: 'self',
-    },
-  },
+    csp: {
+      directives: {
+        'media-src': ["'self'"],
+        'default-src': ["'self'"],
+      }
+    }
+  }
 };
 
 export default config;

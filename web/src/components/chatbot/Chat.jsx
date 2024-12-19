@@ -72,6 +72,7 @@ const Chat = () => {
           },
         });
 
+        console.log("stream is",stream);
         console.log('Microphone Stream Details:', {
           tracks: stream.getTracks().map((track) => ({
             kind: track.kind,
