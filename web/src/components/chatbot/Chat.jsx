@@ -41,7 +41,7 @@ const Chat = () => {
   // };
 
   // checkMicrophonePermission();
-
+  console.log("hello world!");
   useEffect(() => {
     const checkMicrophonePermission = async () => {
       // Check browser support first
