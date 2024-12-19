@@ -1,11 +1,11 @@
-import { PERMISSIONS, entryPointUriPath } from './src/constants';
+import { PERMISSIONS, entryPointUriPath } from './src/constants.js';
 
 /**
  * @type {import('@commercetools-frontend/application-config').ConfigOptionsForCustomApplication}
  */
 const config = {
   name: 'Chatbot',
-  entryPointUriPath,
+  entryPointUriPath:'${env:ENTRY_POINT_URI_PATH}',
   cloudIdentifier: '${env:CLOUD_IDENTIFIER}',
   env: {
     development: {
