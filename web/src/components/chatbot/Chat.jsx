@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import React, { useState } from 'react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MessageInput } from '@chatscope/chat-ui-kit-react';
