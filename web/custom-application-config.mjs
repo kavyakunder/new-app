@@ -1,11 +1,11 @@
-import { PERMISSIONS, entryPointUriPath } from './src/constants.js';
+import { PERMISSIONS, entryPointUriPath } from './src/constants';
 
 /**
  * @type {import('@commercetools-frontend/application-config').ConfigOptionsForCustomApplication}
  */
 const config = {
   name: 'Chatbot',
-  entryPointUriPath:'${env:ENTRY_POINT_URI_PATH}',
+  entryPointUriPath,
   cloudIdentifier: '${env:CLOUD_IDENTIFIER}',
   env: {
     development: {
@@ -34,23 +34,28 @@ const config = {
       permissions: [PERMISSIONS.View],
     },
   ],
-  // headers: {
-  //   permissionsPolicies: {
-  //     microphone: 'self',
-  //   },
-  // },
-   headers: {
-     permissionsPolicies: {
-      microphone: 'self',
+  headers: {
+    permissionsPolicies: {
+      microphone: '*',
     },
     csp: {
-     'connect-src': ["'self'", 'https://*.commercetools.com'],
-        'script-src': ["'self'", "'unsafe-inline'"],
-   
+      'connect-src': [
+        'https://766iuautdb.execute-api.ap-southeast-2.amazonaws.com/dev//ai',
+        "'self'",
+        'https://*.commercetools.com',
+        'app.launchdarkly.com',
+        'clientstream.launchdarkly.com',
+        'events.launchdarkly.com',
+        'app.getsentry.com',
+        '*.sentry.io',
+        'ws:',
+        'localhost:8080',
+        'webpack-internal:',
+        'https',
+        'https://mc.australia-southeast1.gcp.commercetools.com/*',
+      ],
     },
-
-    
-  }
+  },
 };
 
 export default config;

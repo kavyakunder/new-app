@@ -1,13 +1,9 @@
-import 'regenerator-runtime/runtime';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MessageInput } from '@chatscope/chat-ui-kit-react';
 import Messages from './Messages';
 import styless from './chat.module.css';
 import { FaMicrophone } from 'react-icons/fa';
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from 'react-speech-recognition';
 
 const messages = [
   {
@@ -20,33 +16,61 @@ const messages = [
 
 const Chat = () => {
   const [inputValue, setInputValue] = useState('');
+  const [isRecording, setIsRecording] = useState(false);
   const [getNewMessages, setNewMessages] = useState(messages);
-  const { transcript, listening, resetTranscript } = useSpeechRecognition();
+  const recognitionRef = useRef(null);
 
-  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    alert('Speech recognition is not supported in this browser.');
-  }
+  useEffect(() => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.onstart = () => {
+        setIsRecording(true);
+      };
+
+      recognition.onend = () => {
+        setIsRecording(false);
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        handleTextSendMessage(transcript);
+        setInputValue(transcript);
+        setTimeout(() => {
+          setInputValue('');
+        }, 2000);
+      };
+
+      recognitionRef.current = recognition;
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
 
   const handleSpeechRecognition = () => {
-    if (listening) {
-      SpeechRecognition.stopListening();
-      setNewMessages((prev) => [
-        ...prev,
-        {
-          sender: 'user',
-          message: transcript,
-          direction: 'outgoing',
-          sentTime: 'just now',
-        },
-      ]);
-      setInputValue(transcript);
-      resetTranscript();
+    const recognition = recognitionRef.current;
+    if (!recognition) {
+      alert('Speech Recognition is not supported in this browser.');
+      return;
+    }
+    console.log('check here');
+    if (isRecording) {
+      console.log('first if');
+      recognition.stop();
     } else {
-      SpeechRecognition.startListening({ continuous: true });
+      console.log('second');
+      recognition.start();
     }
   };
 
-  const handleTextSendMessage = async () => {
+  const handleTextSendMessage = async (inputValue) => {
     setNewMessages((prev) => [
       ...prev,
       {
@@ -56,6 +80,7 @@ const Chat = () => {
         sentTime: new Date(Date.now()).toLocaleString(),
       },
     ]);
+    setInputValue('');
 
     setNewMessages((prev) => [
       ...prev,
@@ -70,10 +95,10 @@ const Chat = () => {
     try {
       let keyword = 'products';
 
-      if (inputValue.includes('order')) {
+      if (inputValue.includes('orders')) {
         keyword = 'order';
       } else if (inputValue.includes('customer')) {
-        keyword = 'customer';
+        keyword = 'customers';
       } else {
         keyword = 'products';
       }
@@ -124,8 +149,6 @@ const Chat = () => {
         });
       }, 2000);
     }
-
-    setInputValue('');
   };
 
   return (
@@ -139,14 +162,14 @@ const Chat = () => {
             attachButton={false}
             value={inputValue}
             onChange={(value) => setInputValue(value)}
-            onSend={handleTextSendMessage}
+            onSend={() => handleTextSendMessage(inputValue)}
           />
         </div>
         <button
           onClick={handleSpeechRecognition}
-          className={listening ? styless.recordText : styless.recordButton}
+          className={isRecording ? styless.recordText : styless.recordButton}
         >
-          {listening ? (
+          {isRecording ? (
             <span className={styless.stopRecording}>Recording...</span>
           ) : (
             <FaMicrophone size={18} />
