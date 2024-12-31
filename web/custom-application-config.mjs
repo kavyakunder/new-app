@@ -1,4 +1,4 @@
-import { PERMISSIONS, entryPointUriPath } from './src/constants';
+import { PERMISSIONS, entryPointUriPath } from './src/constants.js';
 
 /**
  * @type {import('@commercetools-frontend/application-config').ConfigOptionsForCustomApplication}
