@@ -36,7 +36,8 @@ const config = {
   ],
   headers: {
     permissionsPolicies: {
-      microphone: '*',
+      microphone:
+        'self https://mc.australia-southeast1.gcp.commercetools.com/*',
     },
   },
 };
