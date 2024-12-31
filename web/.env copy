@@ -1,0 +1,7 @@
+ENABLE_NEW_JSX_TRANSFORM="true"
+FAST_REFRESH="true"
+CUSTOM_APPLICATION_ID=cm4js9vq30014626999w1jqyp
+CLOUD_IDENTIFIER=gcp-au
+ENTRY_POINT_URI_PATH=chatbot
+CTP_PROJECT_KEY=demo-connector-app
+APP_URL=https://main.dngxzijetkhut.amplifyapp.com
