@@ -38,23 +38,6 @@ const config = {
     permissionsPolicies: {
       microphone: '*',
     },
-    csp: {
-      'connect-src': [
-        'https://766iuautdb.execute-api.ap-southeast-2.amazonaws.com/dev//ai',
-        "'self'",
-        'https://*.commercetools.com',
-        'app.launchdarkly.com',
-        'clientstream.launchdarkly.com',
-        'events.launchdarkly.com',
-        'app.getsentry.com',
-        '*.sentry.io',
-        'ws:',
-        'localhost:8080',
-        'webpack-internal:',
-        'https',
-        'https://mc.australia-southeast1.gcp.commercetools.com/*',
-      ],
-    },
   },
 };
 
