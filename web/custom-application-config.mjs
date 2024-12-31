@@ -36,7 +36,7 @@ const config = {
   ],
   headers: {
     permissionsPolicies: {
-      microphone: '*',
+      microphone: 'self https://example.com https://api.example.com',
     },
   },
 };
