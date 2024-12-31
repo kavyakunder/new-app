@@ -150,7 +150,7 @@ const Chat = () => {
       }, 2000);
     }
   };
-
+  console.log('chat');
   return (
     <div className={styless.container}>
       <Messages messages={getNewMessages} loading={false} />
@@ -181,3 +181,5 @@ const Chat = () => {
 };
 
 export default Chat;
+
+// https://main.dngxzijetkhut.amplifyapp.com
