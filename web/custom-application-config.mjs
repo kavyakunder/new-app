@@ -1,5 +1,5 @@
 import { PERMISSIONS, entryPointUriPath } from './src/constants.js';
-import '@commercetools-frontend/application-shell/ssr/dist/commercetools-frontend-application-shell-ssr.cjs.js';
+
 /**
  * @type {import('@commercetools-frontend/application-config').ConfigOptionsForCustomApplication}
  */
